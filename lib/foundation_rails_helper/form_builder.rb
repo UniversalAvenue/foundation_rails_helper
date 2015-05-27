@@ -26,7 +26,7 @@ module FoundationRailsHelper
         options.delete(:label)
         options.delete(:label_options)
         super(attribute, options, checked_value, unchecked_value)
-      end + error_and_hint(attribute, options)
+      end + error(attribute, options)
     end
 
     def radio_button(attribute, tag_value, options = {})
