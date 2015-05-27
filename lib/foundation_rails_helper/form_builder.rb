@@ -129,9 +129,8 @@ module FoundationRailsHelper
       label(attribute, text, options)
     end
 
-    def error_and_hint(attribute, options = {})
+    def error(attribute, options = {})
       html = ""
-      html += content_tag(:span, options[:hint], :class => :hint) if options[:hint]
       html += error_for(attribute, options) || ""
       html.html_safe
     end
@@ -144,9 +143,10 @@ module FoundationRailsHelper
       class_options[:class] += " error" if has_error?(attribute)
       options.delete(:label)
       options.delete(:label_options)
-      hint = options.delete(:hint)
+      html += content_tag(:span, options[:hint], :class => :hint) if options[:hint]
+      options.delete(:hint)
       html += yield(class_options)
-      html += error_and_hint(attribute, options.merge({hint: hint}))
+      html += error(attribute, options)
     end
   end
 end
